@@ -6,6 +6,8 @@
     "node": "12.14.1"
   },
   "dependencies": {
-    "core-util-is": "^1.0.2"
+    "core-util-is": "^1.0.2",
+    "discord.js": "^11.5.1",
+    "opusscript": "0.0.7"
   }
 }
