@@ -8,6 +8,7 @@
   "dependencies": {
     "core-util-is": "^1.0.2",
     "discord.js": "^11.5.1",
+    "ffmpeg-static": "^3.0.0",
     "opusscript": "0.0.7",
     "ytdl-core": "^1.0.7"
   }
