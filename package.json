@@ -1,8 +1,8 @@
 {
-    "name": "buxar",
-    "description": "a really cool app",
-    "version": "1.0.0",
-    "engines": {
-      "node": "12.14.1"
-    }
+  "name": "buxar",
+  "description": "a really cool app",
+  "version": "1.0.0",
+  "engines": {
+    "node": "12.14.1"
   }
+}
