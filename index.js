@@ -1,9 +1,8 @@
 const Discord = require ("discord.js");
 const {Client} = require ('discord.js');
 
-const {
-	token,
-} = require('./config.json');
+const	token = process.env.token;
+
 
 const client = new Client();
 const ytdl = require("ytdl-core");
@@ -23,7 +22,7 @@ const queue = new Map();
 
 
 
-client.login(token);
+client.login(token).catch(err => console.log(err));
 
 ////////////////////////////////////////////////////////
 client.on("message",(message) => {
