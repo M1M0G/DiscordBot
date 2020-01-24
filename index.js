@@ -79,10 +79,10 @@ client.on('message', async message => {
   function list(message, queue){
     const channel = client.channels.get("669150559680593954")
     channel.send("Проверяю...")
-    checker  = queue.get(message.guild.id)
-    if (queue != null){
-      for (let i = 0; i < checker.songs.length; i++){
-        for (var n in checker.songs){
+    //checker  = queue.get(message.guild.id)
+   // if (queue != null){
+   ///   for (let i = 0; i < checker.songs.length; i++){
+    //    for (var n in checker.songs){
           //var
             key = n,
             //type = typeof(checker.songs[this.n]),
@@ -91,16 +91,16 @@ client.on('message', async message => {
             //for (var l in n){
              // var
              //   key = l;
-              //  value = Object.keys;
-                channel.send('Трек: '+key+' '+value );
-            }
+       //       //  value = Object.keys;
+      //          channel.send('Трек: '+key+' '+value );
+       //     }
             
-          }
-      } else {
-    channel.send("Пусто!");
-    //console.log(checker.songs);
+   //       }
+   //   } else {
+  //  channel.send("Пусто!");
+  //  //console.log(checker.songs);
     }
-  }
+  //}
 
 
   async function playlist(serverQueue, message){
