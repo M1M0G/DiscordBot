@@ -241,7 +241,7 @@ client.on('message', message => {
 
         
         dispatcher.on('finish', () => {
-        console.log('Finished playing!');
+        console.log('финиш!');
         });
       dispatcher.destroy();
      // dispatcher2.destroy();  
