@@ -1,6 +1,6 @@
 const Discord = require ("discord.js");
 const {Client, RichEmbed} = require ('discord.js');
-const	{token} = require("./config.json");
+//const	{token} = require("./config.json");
 // const request = require('request'); 
 // const cheerio = require('cheerio');
 // const iconv = require('iconv-lite');
