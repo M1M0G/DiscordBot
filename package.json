@@ -6,13 +6,18 @@
     "node": "12.14.1"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
     "core-util-is": "^1.0.2",
     "discord.js": "^11.5.1",
     "ffbinaries": "^1.1.4",
     "ffmpeg": "0.0.4",
-    "ffmpeg-binaries": "^3.2.2-3",
+    "ffmpeg-binaries": "^3.2.2",
     "ffmpeg-static": "^3.0.0",
+    "iconv-lite": "^0.5.1",
+    "jsdom": "^16.1.0",
     "opusscript": "0.0.7",
+    "request": "^2.88.0",
     "ytdl-core": "^1.0.7"
   }
 }

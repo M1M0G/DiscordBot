@@ -1,9 +1,9 @@
 const Discord = require ("discord.js");
 const {Client, RichEmbed} = require ('discord.js');
 const	{token} = require("./config.json");
-const request = require('request'); 
-const cheerio = require('cheerio');
-const iconv = require('iconv-lite');
+// const request = require('request'); 
+// const cheerio = require('cheerio');
+// const iconv = require('iconv-lite');
 const client = new Client();
 const ytdl = require("ytdl-core");
 const queue = new Map();
@@ -261,11 +261,11 @@ client.on("voiceStateUpdate", (old_member, new_member) => {
     }        
 });
 
-client.on('message', msg =>{
- if(msg.startsWith("!позови")){
+// client.on('message', msg =>{
+//  if(msg.startsWith("!позови")){
    
- }
-})
+//  }
+// })
 
 
 ///////////////////////////
@@ -275,59 +275,80 @@ client.on('message', msg =>{
 
 //checker.Embedio(1);
 
-// let check = setInterval(() => {
-//   request({
-//     uri: url, 
-//     method:'GET', 
-//     encoding:'binary'
-// }, function(err, res, page){
-//     let $=cheerio.load(iconv.encode (iconv.decode(new Buffer.from(page, 'binary'), 'utf8'), 'utf8'), {xmlMode: true });
-//     let id = $('articleID');
-//     let item = $('item');
-//     let getID = 0;
-//     let lastID = Number(id.get(0).firstChild.data);
-//     if(previosID !== lastID){
-//       getID = lastID - previosID;
-//       previosID = lastID;
-//       for(i=getID-1; i >= 0; --i){
-//         Embedio(item,i);
-//         console.log(id.get(i).firstChild.data);
-//       }
-//     }
-// })  
-// }, 10000);
-
-// function Embedio(item, i){
-//   let rss = {
-//       id: item.get(i).children[1].firstChild.data,
-//       head: item.get(i).children[3].firstChild.data,
-//       //img: item.get(i).children[5].childNodes[1].attr(url),
-//       content: item.get(i).children[7].firstChild.data,
-//       link: item.get(i).children[9].firstChild.data,
-//       author: item.get(i).children[11].firstChild.data
-//   };
-
-//   if(rss.content.length < 2048){
-//     //try{
-//       let embed = new RichEmbed(rss)
-//       .setTitle(rss.head)
-//       .setDescription(rss.content)
-//       .setAuthor(rss.author)
-//       //.setImage(rss.img)
-//       .attachFiles(['./res/au.jpg'])
-//       .setColor('#FF6347')
-//       .setFooter(rss.link);   
-//       let rss2 = client.channels.get('678678834442272808');
-//       rss2.send(embed);
-//       //rsschanel.send(embed);
-//     //}
-//     //catch(e){console.log("[Ошибка, блять]",e); console.log(rss)};
-//   } else {return console.log("too mach symbols")};
-// }
+const request = require('request'); 
+const cheerio = require('cheerio');
+const iconv = require('iconv-lite');
+const url = "https://danger-zone-tactical.ru/rss/rss.xml";
+let previosID = 30003;
+let i = 0;
 
 
+let check = setInterval(() => {
+  request({
+    uri: url, 
+    method:'GET', 
+    encoding:'binary'
+}, function(err, res, page){
+    let $=cheerio.load(iconv.encode (iconv.decode(new Buffer.from(page, 'binary'), 'utf8'), 'utf8'), {xmlMode: true });
+    let id = $('articleID');
+    let item = $('item');
+    let getID = 0;
+    let lastID = Number(id.get(0).firstChild.data);
+    if(previosID !== lastID){
+      getID = lastID - previosID;
+      previosID = lastID;
+      for(i=getID-1; i >= 0; --i){
+        Embedio(item,i);
+        console.log(id.get(i).firstChild.data);
+      }
+    }
+})  
+}, 10000);
+
+function Embedio(item, i){
+  let rss = {
+      id: item.get(i).children[1].firstChild.data,
+      head: item.get(i).children[3].firstChild.data,
+      //img: item.get(i).children[5].childNodes[1].attr(url),
+      content: item.get(i).children[7].firstChild.data,
+      link: item.get(i).children[9].firstChild.data,
+      author: item.get(i).children[11].firstChild.data
+  };
+
+  let replacer = rss.content.replace(new RegExp("&mdash;",'g'), "").replace(new RegExp("&raquo;",'g'), '-');
+     rss.content = replacer;
 
 
+  if(rss.content.length < 2048){
+  } else {
+      let str = rss.content;
+      rss.content = [];
+    for(let strl = 0; strl < 2044; strl++ ){
+      rss.content +=str[strl];  
+    }
+    rss.content + "..."; 
+    str = []; 
+    }
+
+  try{
+    let embed = new RichEmbed(rss)
+    .setTitle(rss.head)
+    .setDescription(rss.content)
+    .setAuthor(rss.author)
+    //.setImage(rss.img)
+    .attachFiles(['./res/au.jpg'])
+    .setColor('#FF6347')
+    .setFooter(rss.link);   
+    let rss2 = client.channels.get('678678834442272808');
+    rss2.send(embed);
+    //rsschanel.send(embed);
+  }
+  catch(e){console.log("[Ошибка, блять]",e); console.log(rss)};
+
+  }
+
+
+check;
 
 
 
