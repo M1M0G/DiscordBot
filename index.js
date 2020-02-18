@@ -365,7 +365,8 @@ client.once('ready', () => {
  });
 
 
-client.login(token).catch(err => console.log(err)) || client.login(process.env.token).catch(err => console.log(err));
+// client.login(token).catch(err => console.log(err))
+client.login(process.env.token).catch(err => console.log(err));
 
 
 
